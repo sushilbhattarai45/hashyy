@@ -49,7 +49,7 @@ export default function UserProfile() {
               color: "white",
               opacity: 0.7,
             }}
-            class="text-sm text-gray-500 dark:text-gray-400"
+            class="text-sm text-gray-600 dark:text-gray-400"
           >
             I write Bugs{" "}
           </span>
