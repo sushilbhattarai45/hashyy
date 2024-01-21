@@ -1,6 +1,11 @@
 import React from "react";
 import Navbar from "../components/navbar";
-
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 export default function Landing() {
   return (
     <div
@@ -118,30 +123,34 @@ export default function Landing() {
             textAlign: "center",
           }}
         >
-          <button
-            style={{
-              width: "11rem",
-              marginRight: "1rem",
-              height: "2.5rem",
-            }}
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            GitHub{" "}
-          </button>
-          <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-            <span
+          <Link to="https://www.github.com">
+            <button
               style={{
-                backgroundColor: "#0F172A",
-                color: "#fff",
                 width: "11rem",
-                height: "2.3rem",
+                marginRight: "1rem",
+                height: "2.5rem",
               }}
-              class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+              type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              Start the Journey{" "}
-            </span>
-          </button>
+              GitHub{" "}
+            </button>
+          </Link>
+          <Link to="/dashboard">
+            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+              <span
+                style={{
+                  backgroundColor: "#0F172A",
+                  color: "#fff",
+                  width: "11rem",
+                  height: "2.3rem",
+                }}
+                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+              >
+                Start the Journey{" "}
+              </span>
+            </button>
+          </Link>
         </div>
       </div>
     </div>

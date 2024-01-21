@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/navbar";
 import UserProfile from "../components/userProfile";
+import Blog from "../components/blog";
+import Popup from "../components/popup";
 
 export default function Dashboard() {
   return (
@@ -201,7 +203,85 @@ export default function Dashboard() {
             textAlign: "center",
           }}
         >
-          <UserProfile />
+          <div>
+            <UserProfile />
+          </div>
+        </div>
+
+        <p
+          style={{
+            marginTop: "1rem",
+            color: "#A29191",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            fontFamily: "Poppins",
+            margin: "0",
+            padding: "0",
+          }}
+        >
+          @Sushil_bhattarai45's Recent Blogs
+        </p>
+        <div
+          style={{
+            alignSelf: "center",
+            justifyContent: "center",
+            alignContent: "center",
+            width: "80%",
+            flex: 1,
+            display: "flex",
+            flexDirection: "row",
+            marginBottom: "3rem",
+            marginTop: "3rem",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              marginRight: 20,
+            }}
+          >
+            {" "}
+            <Blog />
+          </div>
+          <div
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            {" "}
+            <Blog />
+          </div>
+        </div>
+        <div
+          style={{
+            alignSelf: "center",
+            justifyContent: "center",
+            alignContent: "center",
+            width: "80%",
+            flex: 1,
+            display: "flex",
+            flexDirection: "row",
+            marginBottom: "3rem",
+            marginTop: "3rem",
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              marginRight: 20,
+            }}
+          >
+            {" "}
+            <Blog />
+          </div>
+          <div
+            style={{
+              marginLeft: 20,
+            }}
+          >
+            {" "}
+            <Blog />
+          </div>
         </div>
       </div>
     </div>
