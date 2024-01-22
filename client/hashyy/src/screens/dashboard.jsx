@@ -3,13 +3,21 @@ import Navbar from "../components/navbar";
 import UserProfile from "../components/userProfile";
 import Blog from "../components/blog";
 import Popup from "../components/popup";
+import { getSearchUserData } from "../components/api/getUserData";
+import { getUserPost } from "../components/api/getUserPosts";
 
 export default function Dashboard() {
   const [searchedUser, setSearchedUser] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState([]);
   const [isRealUser, setIsRealUser] = useState(false);
-  const getSearchUser = (e) => {
+  const getSearchUser = async (e) => {
     e.preventDefault();
-    alert(searchedUser);
+    const retrivedData = await getSearchUserData(searchedUser);
+    let url = retrivedData.user.publications.edges[0].node.url;
+    let result = url.split("https://")[1];
+    const retrivedPosts = await getUserPost(result);
+    setPosts(retrivedPosts);
   };
   return (
     <div
