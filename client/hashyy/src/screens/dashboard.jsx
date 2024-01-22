@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import UserProfile from "../components/userProfile";
 import Blog from "../components/blog";
 import Popup from "../components/popup";
 
 export default function Dashboard() {
+  const [searchedUser, setSearchedUser] = useState("");
+  const [isRealUser, setIsRealUser] = useState(false);
+  const getSearchUser = (e) => {
+    e.preventDefault();
+    alert(searchedUser);
+  };
   return (
     <div
       style={{
@@ -130,6 +136,7 @@ export default function Dashboard() {
                 </svg>
               </div>
               <input
+                onInput={(e) => setSearchedUser(e.target.value)}
                 style={{
                   height: "3rem",
                 }}
@@ -141,6 +148,7 @@ export default function Dashboard() {
               />
             </div>
             <button
+              onClick={(e) => getSearchUser(e)}
               style={{
                 height: "3rem",
               }}
