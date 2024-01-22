@@ -1,6 +1,22 @@
 import React from "react";
 
-export default function UserProfile() {
+export default function UserProfile(user) {
+  const {
+    name,
+    username,
+    bio,
+    profilePicture,
+    socialMediaLinks,
+    publications,
+    badges,
+    followersCount,
+    followingsCount,
+    tagline,
+    dateJoined,
+    location,
+    availableFor,
+    tagsFollowing,
+  } = user.data.user;
   return (
     <div>
       <div class="flex flex-row  pb-10">
@@ -11,7 +27,7 @@ export default function UserProfile() {
             width: "150px",
             borderRadius: "50%",
           }}
-          src="https://cdn.hashnode.com/res/hashnode/image/upload/v1663411207387/HGjwj1Tq2.jpeg"
+          src={profilePicture}
           alt="Bonnie image"
         />
         <div
@@ -31,7 +47,7 @@ export default function UserProfile() {
             }}
             class=" text-xl font-medium text-gray-900 dark:text-white"
           >
-            Sushil Bhattarai{" "}
+            {name}{" "}
           </h5>
           <span
             style={{
@@ -42,7 +58,7 @@ export default function UserProfile() {
             }}
             class="text-sm text-gray-500 dark:text-gray-400"
           >
-            @Sushil_bhattarai45{" "}
+            {username}{" "}
           </span>
           <span
             style={{
@@ -51,7 +67,7 @@ export default function UserProfile() {
             }}
             class="text-sm text-gray-600 dark:text-gray-400"
           >
-            I write Bugs{" "}
+            {tagline}{" "}
           </span>
           <span
             style={{

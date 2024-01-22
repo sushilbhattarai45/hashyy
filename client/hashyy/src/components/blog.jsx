@@ -1,6 +1,7 @@
 import React from "react";
 import Popup from "./popup";
-export default function Blog() {
+export default function Blog({ data }) {
+  const { title, brief, coverImage, slug } = data;
   return (
     <div
       class=" border border-gray-200 rounded-lg shadow dark:border-gray-700 dark:bg-gray-800 "
@@ -25,7 +26,7 @@ export default function Blog() {
             width: "300px",
           }}
           class=" w-full rounded-t-lg md:h-auto md:rounded-none md:rounded-s-lg"
-          src="https://cdn.hashnode.com/res/hashnode/image/upload/v1705779655268/3c578099-e78a-409a-9ccd-b317aaea630c.png"
+          src={coverImage?.url}
           alt=""
         />
         <div
@@ -43,17 +44,17 @@ export default function Blog() {
             }}
             class="mb-2 text-1xl font-bold "
           >
-            Deploying an Avail Light Client Node Using Spheron: A Quick Guide{" "}
+            {title}{" "}
           </h5>
           <p
             style={{
               color: "#A29191",
-              fontSize: "0.8rem",
+              overflow: "hidden",
+              fontSize: "0.7rem",
             }}
             class="mb-3 font-normal text-gray-700 dark:text-gray-400"
           >
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
+            {brief}
           </p>
         </div>
       </a>

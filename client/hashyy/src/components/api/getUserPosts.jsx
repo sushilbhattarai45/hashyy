@@ -17,6 +17,9 @@ export async function getUserPost(url) {
               title
               brief
               url
+              coverImage {
+                url
+              }
               content {
                 html
               }
@@ -37,6 +40,5 @@ export async function getUserPost(url) {
   //   const tagRegExp = new RegExp("<s*[^>]*>", "g");
   //   let test = data.replace(tagRegExp, "");
   //   console.log(JSON.parse(test));
-  console.log(results);
   return results.publication.posts.edges;
 }

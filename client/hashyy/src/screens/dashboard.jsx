@@ -9,15 +9,20 @@ import { getUserPost } from "../components/api/getUserPosts";
 export default function Dashboard() {
   const [searchedUser, setSearchedUser] = useState("");
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [isRealUser, setIsRealUser] = useState(false);
   const getSearchUser = async (e) => {
     e.preventDefault();
     const retrivedData = await getSearchUserData(searchedUser);
-    let url = retrivedData.user.publications.edges[0].node.url;
-    let result = url.split("https://")[1];
-    const retrivedPosts = await getUserPost(result);
-    setPosts(retrivedPosts);
+    setUser(retrivedData);
+    if (retrivedData.user != null) {
+      setIsRealUser(true);
+      console.log(retrivedData);
+      let url = retrivedData.user.publications.edges[0].node.url;
+      let result = url.split("https://")[1];
+      const retrivedPosts = await getUserPost(result);
+      setPosts(retrivedPosts);
+    }
   };
   return (
     <div
@@ -219,85 +224,48 @@ export default function Dashboard() {
             textAlign: "center",
           }}
         >
-          <div>
-            <UserProfile />
-          </div>
+          <div>{isRealUser ? <UserProfile data={user} /> : null}</div>
         </div>
 
-        <p
-          style={{
-            marginTop: "1rem",
-            color: "#A29191",
-            fontSize: "1.1rem",
-            fontWeight: "bold",
-            fontFamily: "Poppins",
-            margin: "0",
-            padding: "0",
-          }}
-        >
-          @Sushil_bhattarai45's Recent Blogs
-        </p>
+        {isRealUser ? (
+          <p
+            style={{
+              marginTop: "1rem",
+              color: "#A29191",
+              fontSize: "1.1rem",
+              fontWeight: "bold",
+              fontFamily: "Poppins",
+              margin: "0",
+              padding: "0",
+            }}
+          >
+            {user.user.name}
+            's Recent Blogs
+          </p>
+        ) : null}
         <div
+          className="flex flex-row col col-md-6"
           style={{
             alignSelf: "center",
-            justifyContent: "center",
+            justifyContent: "space-around",
             alignContent: "center",
             width: "80%",
             flex: 1,
             display: "flex",
+            flexWrap: "wrap",
             flexDirection: "row",
             marginBottom: "3rem",
             marginTop: "3rem",
             textAlign: "center",
           }}
         >
-          <div
-            style={{
-              marginRight: 20,
-            }}
-          >
-            {" "}
-            <Blog />
-          </div>
-          <div
-            style={{
-              marginLeft: 20,
-            }}
-          >
-            {" "}
-            <Blog />
-          </div>
-        </div>
-        <div
-          style={{
-            alignSelf: "center",
-            justifyContent: "center",
-            alignContent: "center",
-            width: "80%",
-            flex: 1,
-            display: "flex",
-            flexDirection: "row",
-            marginBottom: "3rem",
-            marginTop: "3rem",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              marginRight: 20,
-            }}
-          >
-            {" "}
-            <Blog />
-          </div>
-          <div
-            style={{
-              marginLeft: 20,
-            }}
-          >
-            {" "}
-            <Blog />
-          </div>
+          {posts.map((post, key) => {
+            return (
+              <div style={{ marginTop: 20 }}>
+                <Blog data={post.node} title={post} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
