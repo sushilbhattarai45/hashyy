@@ -21,6 +21,7 @@ export async function getUserPost(url) {
                 url
               }
               content {
+                markdown
                 html
               }
             }

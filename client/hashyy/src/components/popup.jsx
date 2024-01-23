@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Popup(data) {
+export default function Popup({ data }) {
   const { title, brief, coverImage, slug } = data;
   return (
     <div>
@@ -18,14 +18,14 @@ export default function Popup(data) {
           }}
           class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
         >
-          AI Summerizer {title}{" "}
+          AI Summerizer{" "}
         </span>
       </button>
 
       <div
         id="static-modal"
         data-modal-backdrop="static"
-        tabindex="-1"
+        tabIndex="-1"
         aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
       >
