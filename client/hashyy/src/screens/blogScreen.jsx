@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../components/navbar";
+import { useLocation } from "react-router-dom";
+import AiSummerise from "../components/api/aiSummerise";
 import {
   createBrowserRouter,
   RouterProvider,
+  useNavigate,
   Route,
   Link,
 } from "react-router-dom";
-export default function BlogScreen() {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+export default function BlogScreen(props) {
+  const navigate = useNavigate();
+
+  const [postData, setPostData] = React.useState({});
+  const location = useLocation();
+  const [aiData, setAiData] = React.useState("");
+  const data = location.state.data;
+
+  const UserProfile = location.state.user;
+  useEffect(() => {
+    getAiData();
+  }, [location]);
+  async function getAiData() {
+    toast.info("Loading Summerised Text!");
+
+    const aiText = await AiSummerise(data.content.markdown);
+    setAiData(aiText);
+    toast.success("Loaded Successfully!");
+  }
   return (
     <div
       style={{
@@ -18,6 +41,7 @@ export default function BlogScreen() {
         backgroundColor: "#0F172A",
       }}
     >
+      <ToastContainer />
       <div
         style={{
           alignSelf: "center",
@@ -45,7 +69,7 @@ export default function BlogScreen() {
             <figcaption class="flex items-center mt-6 space-x-3 rtl:space-x-reverse">
               <img
                 class="w-6 h-6 rounded-full"
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                src={UserProfile?.profilePicture}
                 alt="profile picture"
               />
               <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-300 dark:divide-gray-700">
@@ -53,10 +77,10 @@ export default function BlogScreen() {
                   style={{ color: "white" }}
                   class="pe-3 font-medium text-gray-900 dark:text-white"
                 >
-                  Bonnie Green
+                  {UserProfile.name}{" "}
                 </cite>
                 <cite class="ps-3 text-sm text-gray-500 dark:text-gray-400">
-                  CTO at Flowbite
+                  @{UserProfile.username}{" "}
                 </cite>
               </div>
             </figcaption>
@@ -74,7 +98,7 @@ export default function BlogScreen() {
               padding: "0",
             }}
           >
-            Easy Analysis, Creative Generation & Smart Recommendation
+            {data?.title}{" "}
           </p>{" "}
         </div>
 
@@ -100,10 +124,10 @@ export default function BlogScreen() {
             <img
               style={{
                 borderRadius: "10px",
-                width: "85%",
+                width: "90%",
                 height: "300px",
               }}
-              src="https://cdn.hashnode.com/res/hashnode/image/upload/v1684760280335/18820209-b284-4c4c-b811-5ba7e85e3676.jpeg"
+              src={data.coverImage?.url}
               alt="profile picture"
             />
             <div
@@ -118,30 +142,40 @@ export default function BlogScreen() {
                 justifyContent: "center",
               }}
             >
-              <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span
-                  style={{
-                    backgroundColor: "#0F172A",
-                    color: "#fff",
-                    width: "11rem",
-                    height: "2.3rem",
-                  }}
-                  class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
-                >
-                  Back{" "}
-                </span>
-              </button>
-              <button
-                style={{
-                  width: "11rem",
-                  marginTop: -8,
-                  height: "2.5rem",
+              <Link
+                to={".."}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(-1);
                 }}
-                type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Read Full- Hashnode
-              </button>
+                <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                  <span
+                    style={{
+                      backgroundColor: "#0F172A",
+                      color: "#fff",
+                      width: "11rem",
+                      height: "2.3rem",
+                    }}
+                    class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                  >
+                    Back{" "}
+                  </span>
+                </button>
+              </Link>
+              <Link to={data?.url}>
+                <button
+                  style={{
+                    width: "11rem",
+                    marginTop: -8,
+                    height: "2.5rem",
+                  }}
+                  type="button"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Read Full- Hashnode
+                </button>
+              </Link>
             </div>{" "}
           </div>
           <div
@@ -150,51 +184,64 @@ export default function BlogScreen() {
               flex: 1,
             }}
           >
-            {" "}
-            <p
-              style={{
-                marginTop: "1rem",
-                textAlign: "left",
-                color: "#fff",
-                fontSize: "0.95rem",
-                fontWeight: "500",
-                fontFamily: "Poppins",
-                margin: "0",
-                padding: "0",
-              }}
-            >
-              <em>
-                "As I am referencing the real Star Wars website for the
-                inspiration for this Ahsoka React app, I'm closely mimicking the
-                site's structure. When you navigate to the Databank Ahsoka
-                section, you will see a list of category links, characters,
-                creatures, droids, and more. You will also find a variety of
-                clickable small cards on the page, each featuring a name, image,
-                and lightsaber icon. When you click on a small card, you are
-                directed to a new page featuring a similar, larger card that now
-                includes a paragraph of information about the selected item. So,
-                for my project, I created a "small card content" component that
-                closely resembles the small cards as seen on the Star Wars
-                website, and when clicked on, a corresponding large card renders
-                to the webpage. The SmallCardContent component is designed to
-                display a small card for each Star Wars selected category item (
-                the default category is characters). It takes in several props
-                that determine its content and behavior."
-              </em>
-              <br />
-              <span
+            {!aiData ? (
+              <div
                 style={{
-                  color: "skyblue",
+                  marginTop: "7rem",
+                  backgroundColor: "#0F172A",
+                }}
+                class="flex items-center justify-center  rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+              >
+                <div role="status">
+                  <svg
+                    aria-hidden="true"
+                    class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill"
+                    />
+                  </svg>
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            ) : (
+              <p
+                style={{
+                  marginTop: "1rem",
+                  textAlign: "left",
+                  color: "#fff",
                   fontSize: "1rem",
-                  fontWeight: "475",
+                  fontWeight: "500",
                   fontFamily: "Poppins",
                   margin: "0",
                   padding: "0",
                 }}
               >
-                AI Summerized
-              </span>
-            </p>
+                <em>{aiData}</em>
+                <br />
+                <br />-
+                <span
+                  style={{
+                    color: "skyblue",
+                    fontSize: "1rem",
+                    fontWeight: "475",
+                    fontFamily: "Poppins",
+                    margin: "0",
+                    padding: "0",
+                  }}
+                >
+                  AI Summerized
+                </span>
+              </p>
+            )}
           </div>
         </div>
       </div>

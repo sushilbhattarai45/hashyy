@@ -5,23 +5,29 @@ import Blog from "../components/blog";
 import Popup from "../components/popup";
 import { getSearchUserData } from "../components/api/getUserData";
 import { getUserPost } from "../components/api/getUserPosts";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export default function Dashboard() {
   const [searchedUser, setSearchedUser] = useState("");
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const [isRealUser, setIsRealUser] = useState(false);
   const getSearchUser = async (e) => {
+    toast.info("Searching For User");
+
     e.preventDefault();
     const retrivedData = await getSearchUserData(searchedUser);
     setUser(retrivedData);
     if (retrivedData.user != null) {
+      toast.success("User Found!");
       setIsRealUser(true);
       console.log(retrivedData);
       let url = retrivedData.user.publications.edges[0].node.url;
       let result = url.split("https://")[1];
       const retrivedPosts = await getUserPost(result);
       setPosts(retrivedPosts);
+    } else {
+      toast.error("User Not Found!");
     }
   };
   return (
@@ -35,6 +41,8 @@ export default function Dashboard() {
         backgroundColor: "#0F172A",
       }}
     >
+      <ToastContainer />
+
       <div
         style={{
           alignSelf: "center",
@@ -262,7 +270,7 @@ export default function Dashboard() {
           {posts.map((post, key) => {
             return (
               <div style={{ marginTop: 20 }}>
-                <Blog data={post.node} title={post} />
+                <Blog data={post.node} UserProfile={user} />
               </div>
             );
           })}

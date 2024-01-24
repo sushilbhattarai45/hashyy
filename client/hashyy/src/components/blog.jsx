@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import AiSummerise from "./api/aiSummerise";
-export default function Blog({ data }) {
+export default function Blog({ data, UserProfile }) {
   const [aiData, setAiData] = React.useState("");
   const { title, brief, coverImage, slug, url, content } = data;
+  const { name, photo, tagline, username } = UserProfile;
   async function getAiData() {
     const aiText = await AiSummerise(content.markdown);
     setAiData(aiText);
@@ -77,6 +78,27 @@ export default function Blog({ data }) {
           justifyContent: "center",
         }}
       >
+        <Link
+          to={{
+            pathname: "../blogs",
+          }}
+          state={{ data: data, user: UserProfile.user }}
+        >
+          <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            <span
+              style={{
+                backgroundColor: "#0F172A",
+                color: "#fff",
+                width: "11rem",
+                height: "2.3rem",
+              }}
+              className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+            >
+              Get AI Summarized
+            </span>
+          </button>
+        </Link>
+
         {/* <div
           onClick={() => {
             alert(
@@ -165,7 +187,7 @@ export default function Blog({ data }) {
           </Popup>
         </div> */}
         {/* <Popup data={data} /> */}
-        <Link to={url}>
+        {/* <Link to={url}>
           <button
             style={{
               width: "11rem",
@@ -177,7 +199,7 @@ export default function Blog({ data }) {
           >
             Read On Hashnode
           </button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
