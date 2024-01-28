@@ -7,6 +7,7 @@ import { getSearchUserData } from "../components/api/getUserData";
 import { getUserPost } from "../components/api/getUserPosts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 export default function Dashboard() {
   const [searchedUser, setSearchedUser] = useState("");
   const [posts, setPosts] = useState([]);

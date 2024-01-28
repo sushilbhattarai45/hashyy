@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Charts from "../components/charts";
 export default function BlogScreen(props) {
   const navigate = useNavigate();
 
@@ -46,6 +47,7 @@ export default function BlogScreen(props) {
         style={{
           alignSelf: "center",
           width: "70%",
+          marginTop: 30,
         }}
       >
         {" "}
@@ -62,6 +64,7 @@ export default function BlogScreen(props) {
           style={{
             alignSelf: "center",
             width: "60%",
+            marginTop: "2rem",
             textAlign: "center",
           }}
         >
@@ -107,7 +110,7 @@ export default function BlogScreen(props) {
             alignSelf: "center",
             alignContent: "center",
             width: "70%",
-            flex: 1,
+            flex: 0.8,
             display: "flex",
             flexDirection: "row",
             marginTop: "2rem",
@@ -242,6 +245,103 @@ export default function BlogScreen(props) {
                 </span>
               </p>
             )}
+          </div>
+        </div>
+        <div
+          style={{
+            alignSelf: "center",
+            alignContent: "center",
+            width: "50%",
+            flex: 0.3,
+            marginTop: "3rem",
+            borderRadius: "10px",
+            display: "flex",
+            flexDirection: "row",
+            textAlign: "center",
+          }}
+        >
+          {" "}
+          <p
+            style={{
+              color: "white",
+              fontSize: "1.2rem",
+              marginTop: "4rem",
+              fontWeight: "bold",
+              fontFamily: "Poppins",
+              margin: "0",
+              padding: "0",
+            }}
+          >
+            Comments Analyzer{" "}
+          </p>
+        </div>
+        <div
+          style={{
+            alignSelf: "center",
+            alignContent: "center",
+            width: "50%",
+            flex: 0.1,
+            marginTop: "1rem",
+            marginBottom: "3rem",
+            borderRadius: "10px",
+            display: "flex",
+            flexDirection: "row",
+            textAlign: "center",
+            backgroundColor: "#3ea85e",
+          }}
+        >
+          {" "}
+          <div
+            style={{
+              width: "100%",
+              flex: 0.4,
+              padding: "1rem",
+              backgroundColor: "white",
+              borderRadius: "10px",
+              color: "#fff",
+            }}
+          >
+            {" "}
+            <Charts />
+          </div>
+          <div
+            style={{
+              flex: 0.7,
+              backgroundColor: "#071023",
+              width: "100%",
+              color: "white",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignContent: "center",
+              alignItems: "center",
+              display: "flex",
+            }}
+          >
+            <p
+              style={{
+                color: "white",
+                fontSize: "1.2rem",
+                marginTop: "4rem",
+                fontWeight: "bold",
+                fontFamily: "Poppins",
+                margin: "0",
+                padding: "0",
+              }}
+            >
+              Total comments:
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignContent: "left",
+              }}
+            >
+              {" "}
+              <p style={{ color: "#00ff00" }}> 10 Positive</p>
+              <p style={{ color: "#ff0000" }}>8 Negative </p>
+              <p style={{ color: "#2160ff" }}> 0 Neutral</p>{" "}
+            </div>
           </div>
         </div>
       </div>

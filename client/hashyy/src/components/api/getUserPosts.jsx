@@ -14,6 +14,16 @@ export async function getUserPost(url) {
         posts(first: 10) {
           edges {
             node {
+              comments(first: 10) {
+                edges {
+                  node {
+                    id
+                    content {
+                      markdown
+                    }
+                  }
+                }
+              }
               title
               brief
               url

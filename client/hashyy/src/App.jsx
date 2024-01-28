@@ -6,6 +6,11 @@ import { Routes, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Landing from "./screens/landing";
 import Dashboard from "./screens/dashboard";
 import BlogScreen from "./screens/blogScreen";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 function App() {
   const [count, setCount] = useState(0);
 
