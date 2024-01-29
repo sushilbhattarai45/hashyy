@@ -7,11 +7,12 @@ export default function Compare() {
     display: "flex",
     flexDirection: "row",
     alignSelf: "center",
-    alignContent: "center",
-    marginTop: "3rem",
-    justifyContent: "center",
+    marginTop: "2rem",
+    marginLeft: "-1rem",
+
+    justifyContent: "space-between",
     flex: 1,
-    width: "70%",
+    width: "72%",
   };
 
   const columnStyle = {
@@ -57,29 +58,83 @@ export default function Compare() {
       >
         <Navbar />
       </div>
-      <div
+      {/* <div
         style={{
-          alignSelf: "center",
           width: "70%",
           marginTop: "3rem",
-          justifyContent: "flex-start",
-          textAlign: "left",
+          //   backgroundColor: "red",
+          display: "flex",
+          flexDirection: "row",
+          alignSelf: "center",
+          flex: 1,
+          justifyContent: "center",
+          alignContent: "center",
+          textAlign: "center",
         }}
       >
         <p
           style={{
             color: "#fff",
-            fontSize: "1.5rem",
-            marginLeft: "2rem",
+            fontSize: "1.6rem",
             fontWeight: "bold",
-            width: "70%",
-            textAlign: "left",
+            width: "100%",
+            textAlign: "center",
             fontFamily: "Poppins",
             margin: "0",
             padding: "0",
           }}
         >
-          Compare Blogs :
+          AI Summaries, Sentiment Analysis, Blog Insights – Hashyy: Elevate Your
+          Content Understanding. Uncover AI Descriptions, Analyze Sentiments,
+          and Compare Blogs seamlessly!
+        </p>{" "}
+      </div> */}
+      <div
+        style={{
+          alignSelf: "center",
+          alignContent: "center",
+          width: "60%",
+          marginTop: "3rem",
+          textAlign: "center",
+        }}
+      >
+        <p
+          style={{
+            color: "#fff",
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            width: "100%",
+            textAlign: "center",
+            fontFamily: "Poppins",
+            margin: "0",
+            padding: "0",
+          }}
+        >
+          Instant Summaries, Sentiment Insights & Blog Comparisons :
+          <br />
+        </p>{" "}
+      </div>
+      <div
+        style={{
+          marginLeft: "13rem",
+          fontFamily: "Poppins",
+          marginTop: "1rem",
+        }}
+      >
+        <p
+          style={{
+            color: "#fff",
+            fontSize: "1.1rem",
+            fontWeight: "bold",
+            width: "100%",
+            textAlign: "left",
+            marginLeft: "1rem",
+            fontFamily: "Poppins",
+            margin: "0",
+            padding: "0",
+          }}
+        >
+          Comapring Blogs:
           <br />
         </p>{" "}
       </div>
@@ -245,7 +300,16 @@ export default function Compare() {
           </div>
           {/* <Charts /> */}
         </div>
-
+        <div
+          style={{
+            flex: 1,
+            margin: "10px",
+            padding: "20px",
+            // backgroundColor: "red",
+          }}
+        >
+          <br />
+        </div>
         {/* Second Column */}
         <div style={columnStyle}>
           <img

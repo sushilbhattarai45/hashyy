@@ -297,74 +297,89 @@ export default function BlogScreen(props) {
             display: "flex",
             flexDirection: "row",
             textAlign: "center",
-            backgroundColor: "#3ea85e",
           }}
         >
           {" "}
-          <div
-            style={{
-              width: "100%",
-              flex: 0.4,
-              padding: "0.2rem",
-              backgroundColor: "white",
-              borderRadius: "10px",
-              color: "#fff",
-            }}
-          >
-            {" "}
-            <Charts sData={sentimentsData} />
-          </div>
-          <div
-            style={{
-              flex: 1,
-              backgroundColor: "#071023",
-              width: "100%",
-              color: "white",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignContent: "center",
-              alignItems: "center",
-              display: "flex",
-            }}
-          >
+          {data.comments.edges?.length > 0 ? (
+            <>
+              <div
+                style={{
+                  width: "100%",
+                  flex: 0.4,
+                  padding: "0.2rem",
+                  backgroundColor: "white",
+                  borderRadius: "10px",
+                  color: "#fff",
+                }}
+              >
+                {" "}
+                <Charts sData={sentimentsData} />
+              </div>
+
+              <div
+                style={{
+                  flex: 1,
+                  backgroundColor: "#071023",
+                  width: "100%",
+                  color: "white",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignContent: "center",
+                  alignItems: "center",
+                  display: "flex",
+                }}
+              >
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "1.2rem",
+                    marginTop: "4rem",
+                    fontWeight: "bold",
+                    fontFamily: "Poppins",
+                    margin: "0",
+                    padding: "0",
+                  }}
+                >
+                  Total comments:{" "}
+                  {sentimentsData[0]?.positive +
+                    sentimentsData[0]?.negative +
+                    sentimentsData[0]?.neutral}
+                </p>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignContent: "left",
+                  }}
+                >
+                  {" "}
+                  <p style={{ color: "#00ff00", fontFamily: "Poppins" }}>
+                    {" "}
+                    {sentimentsData[0]?.positive} Positive
+                  </p>
+                  <p style={{ color: "#ff0000", fontFamily: "Poppins" }}>
+                    {" "}
+                    {sentimentsData[0]?.negative} Negative{" "}
+                  </p>
+                  <p style={{ color: "#2160ff", fontFamily: "Poppins" }}>
+                    {" "}
+                    {sentimentsData[0]?.neutral} Neutral
+                  </p>{" "}
+                </div>
+              </div>
+            </>
+          ) : (
             <p
               style={{
-                color: "white",
-                fontSize: "1.2rem",
-                marginTop: "4rem",
-                fontWeight: "bold",
+                color: "#fff",
                 fontFamily: "Poppins",
-                margin: "0",
-                padding: "0",
+                fontSize: "0.8rem",
+                fontWeight: "bold",
               }}
             >
-              Total comments:{" "}
-              {sentimentsData[0]?.positive +
-                sentimentsData[0]?.negative +
-                sentimentsData[0]?.neutral}
+              PS: This post has no comments
             </p>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignContent: "left",
-              }}
-            >
-              {" "}
-              <p style={{ color: "#00ff00", fontFamily: "Poppins" }}>
-                {" "}
-                {sentimentsData[0]?.positive} Positive
-              </p>
-              <p style={{ color: "#ff0000", fontFamily: "Poppins" }}>
-                {" "}
-                {sentimentsData[0]?.negative} Negative{" "}
-              </p>
-              <p style={{ color: "#2160ff", fontFamily: "Poppins" }}>
-                {" "}
-                {sentimentsData[0]?.neutral} Neutral
-              </p>{" "}
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
