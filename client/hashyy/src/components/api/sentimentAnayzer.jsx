@@ -23,7 +23,7 @@ export default async function Sentiments(data) {
       headers: {
         "content-type": "application/json",
         Accept: "application/json",
-        "X-RapidAPI-Key": "699ea8e4admsha947a620bc04ad1p16131ajsncd08755dae31",
+        "X-RapidAPI-Key": "e562bb25b0msh1aefa205d9a60ecp1267d1jsn87a941f095f9",
         "X-RapidAPI-Host": "sentiment-analysis9.p.rapidapi.com",
       },
       data: [
