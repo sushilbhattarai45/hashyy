@@ -20,7 +20,7 @@ export default function Charts() {
             ],
           },
         ]}
-        width={400}
+        width={350}
         height={175}
       />
     </div>

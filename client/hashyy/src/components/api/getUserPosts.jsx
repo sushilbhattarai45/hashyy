@@ -14,7 +14,7 @@ export async function getUserPost(url) {
         posts(first: 10) {
           edges {
             node {
-              comments(first: 10) {
+              comments(first: 20) {
                 edges {
                   node {
                     id

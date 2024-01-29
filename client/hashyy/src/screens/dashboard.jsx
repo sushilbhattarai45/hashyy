@@ -13,6 +13,10 @@ export default function Dashboard() {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const [isRealUser, setIsRealUser] = useState(false);
+
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
   const getSearchUser = async (e) => {
     toast.info("Searching For User");
 

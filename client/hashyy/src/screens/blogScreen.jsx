@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import { useLocation } from "react-router-dom";
 import AiSummerise from "../components/api/aiSummerise";
@@ -12,18 +12,29 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Charts from "../components/charts";
+import Sentiments from "../components/api/sentimentAnayzer";
 export default function BlogScreen(props) {
   const navigate = useNavigate();
 
-  const [postData, setPostData] = React.useState({});
+  const [postData, setPostData] = useState({});
   const location = useLocation();
-  const [aiData, setAiData] = React.useState("");
+  const [aiData, setAiData] = useState("");
   const data = location.state.data;
-
+  const [sentimentsData, setSentimentsData] = useState([]);
   const UserProfile = location.state.user;
   useEffect(() => {
+    getSentimentData();
     getAiData();
+    window.scrollTo(0, 0);
   }, [location]);
+  async function getSentimentData() {
+    toast.info("Loading Comments Sentiments!");
+    const fetchSentimentsData = await Sentiments(data.comments.edges);
+    console.log("fetching data");
+    console.log(fetchSentimentsData);
+    setSentimentsData(fetchSentimentsData);
+  }
+
   async function getAiData() {
     toast.info("Loading Summerised Text!");
 
@@ -128,7 +139,7 @@ export default function BlogScreen(props) {
               style={{
                 borderRadius: "10px",
                 width: "90%",
-                height: "300px",
+                height: "250px",
               }}
               src={data.coverImage?.url}
               alt="profile picture"
@@ -265,7 +276,7 @@ export default function BlogScreen(props) {
             style={{
               color: "white",
               fontSize: "1.2rem",
-              marginTop: "4rem",
+              marginTop: "6rem",
               fontWeight: "bold",
               fontFamily: "Poppins",
               margin: "0",
@@ -295,7 +306,7 @@ export default function BlogScreen(props) {
             style={{
               width: "100%",
               flex: 0.4,
-              padding: "1rem",
+              padding: "0.2rem",
               backgroundColor: "white",
               borderRadius: "10px",
               color: "#fff",
@@ -306,7 +317,7 @@ export default function BlogScreen(props) {
           </div>
           <div
             style={{
-              flex: 0.7,
+              flex: 1,
               backgroundColor: "#071023",
               width: "100%",
               color: "white",
