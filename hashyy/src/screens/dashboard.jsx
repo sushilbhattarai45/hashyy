@@ -91,7 +91,8 @@ export default function Dashboard() {
               padding: "0",
             }}
           >
-            Easy Analysis, Creative Generation & Smart Recommendation
+            Instant Summaries, Sentiment Insights & Blog Comparisons :
+            <br />
           </p>{" "}
         </div>
         <div
@@ -221,8 +222,10 @@ export default function Dashboard() {
               padding: "0",
             }}
           >
-            Unlock the power of MindsDB to turn data into content gold. Create,
-            analyze, and protect your brand seamlessly.{" "}
+            Discover Hashyy, the Hashnode-powered tool. Effortlessly read
+            AI-summarized blogs, check comment sentiment, and compare two blogs
+            for a streamlined blogging experience. Your Ultimate Hashnode
+            Companion!{" "}
           </p>{" "}
         </div>
         <div
