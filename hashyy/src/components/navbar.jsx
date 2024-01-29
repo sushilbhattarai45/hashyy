@@ -5,6 +5,7 @@ export default function Navbar() {
     <nav
       style={{
         borderRadius: "10px",
+        alignItems: "center",
         backgroundColor: "#071023",
       }}
       class="bg-white border-gray-200 dark:bg-gray-900"

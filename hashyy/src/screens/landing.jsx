@@ -34,6 +34,7 @@ export default function Landing() {
           flex: 1,
           marginLeft: "-15px",
           display: "flex",
+          marginTop: "-2rem",
           flexDirection: "column",
           justifyContent: "center",
           alignContent: "center",
@@ -52,7 +53,7 @@ export default function Landing() {
           <p
             style={{
               color: "#fff",
-              fontSize: "3rem",
+              fontSize: "2.5rem",
               fontWeight: "bold",
               width: "100%",
               textAlign: "center",
@@ -61,7 +62,9 @@ export default function Landing() {
               padding: "0",
             }}
           >
-            Instant Summaries, Sentiment Insights & Blog Comparisons :{" "}
+            Instant Summaries, Sentiment Insights
+            <br /> &<br />
+            Blog Comparisons{" "}
           </p>{" "}
         </div>
         <div
@@ -86,7 +89,7 @@ export default function Landing() {
             }}
           >
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              <p style={{ marginLeft: "46px", fontSize: "48px" }}>Hashyy</p>
+              <p style={{ marginLeft: "0px", fontSize: "48px" }}>Hashyy</p>
             </span>{" "}
           </p>{" "}
         </div>
@@ -95,7 +98,7 @@ export default function Landing() {
             alignSelf: "center",
             alignContent: "center",
             width: "50%",
-            marginTop: "2rem",
+            marginTop: "3rem",
             textAlign: "center",
           }}
         >
@@ -103,7 +106,7 @@ export default function Landing() {
             style={{
               marginTop: "1rem",
               color: "#A29191",
-              fontSize: "1.3rem",
+              fontSize: "1.1rem",
               fontWeight: "bold",
               fontFamily: "Poppins",
               margin: "0",

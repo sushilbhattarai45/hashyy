@@ -33,7 +33,6 @@ export async function getSearchUserData(nameofuser) {
           edges {
             node {
               title
-
               url
             }
           }
@@ -60,7 +59,6 @@ export async function getSearchUserData(nameofuser) {
           slug
           logo
           tagline
-
           followersCount
           postsCount
         }

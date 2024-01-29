@@ -94,10 +94,21 @@ export default function Blog({ data, UserProfile }) {
               }}
               className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
             >
-              Get AI Summarized
+              Analyze Content
             </span>
           </button>
         </Link>
+        <button
+          style={{
+            width: "11rem",
+            height: "2.5rem",
+            marginTop: "-7px",
+          }}
+          type="button"
+          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Compare
+        </button>
 
         {/* <div
           onClick={() => {
