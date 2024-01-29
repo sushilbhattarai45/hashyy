@@ -1,7 +1,8 @@
 import React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 
-export default function Charts() {
+export default function Charts(sData) {
+  console.log("sData");
   return (
     <div
       style={{
@@ -14,9 +15,24 @@ export default function Charts() {
         series={[
           {
             data: [
-              { id: 0, value: 10, label: "Positive", color: "#00ff00" },
-              { id: 1, value: 15, label: "Negative", color: "#ff0000" },
-              { id: 2, value: 20, label: "Neutral", color: "#2160ff" },
+              {
+                id: 0,
+                value: sData?.sData[0]?.positive,
+                label: "Positive",
+                color: "#00ff00",
+              },
+              {
+                id: 1,
+                value: sData?.sData[0]?.negative,
+                label: "Negative",
+                color: "#ff0000",
+              },
+              {
+                id: 2,
+                value: 0,
+                label: "Neutral",
+                color: "#2160ff",
+              },
             ],
           },
         ]}

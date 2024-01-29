@@ -37,7 +37,6 @@ export default function BlogScreen(props) {
 
   async function getAiData() {
     toast.info("Loading Summerised Text!");
-
     const aiText = await AiSummerise(data.content.markdown);
     setAiData(aiText);
     toast.success("Loaded Successfully!");
@@ -276,7 +275,7 @@ export default function BlogScreen(props) {
             style={{
               color: "white",
               fontSize: "1.2rem",
-              marginTop: "6rem",
+              marginTop: "2rem",
               fontWeight: "bold",
               fontFamily: "Poppins",
               margin: "0",
@@ -313,7 +312,7 @@ export default function BlogScreen(props) {
             }}
           >
             {" "}
-            <Charts />
+            <Charts sData={sentimentsData} />
           </div>
           <div
             style={{
@@ -339,7 +338,10 @@ export default function BlogScreen(props) {
                 padding: "0",
               }}
             >
-              Total comments:
+              Total comments:{" "}
+              {sentimentsData[0]?.positive +
+                sentimentsData[0]?.negative +
+                sentimentsData[0]?.neutral}
             </p>
             <div
               style={{
@@ -349,9 +351,18 @@ export default function BlogScreen(props) {
               }}
             >
               {" "}
-              <p style={{ color: "#00ff00" }}> 10 Positive</p>
-              <p style={{ color: "#ff0000" }}>8 Negative </p>
-              <p style={{ color: "#2160ff" }}> 0 Neutral</p>{" "}
+              <p style={{ color: "#00ff00", fontFamily: "Poppins" }}>
+                {" "}
+                {sentimentsData[0]?.positive} Positive
+              </p>
+              <p style={{ color: "#ff0000", fontFamily: "Poppins" }}>
+                {" "}
+                {sentimentsData[0]?.negative} Negative{" "}
+              </p>
+              <p style={{ color: "#2160ff", fontFamily: "Poppins" }}>
+                {" "}
+                {sentimentsData[0]?.neutral} Neutral
+              </p>{" "}
             </div>
           </div>
         </div>
