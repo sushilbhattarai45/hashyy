@@ -20,8 +20,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AiSummerise from "./api/aiSummerise";
+import { Drawer } from "@mui/material";
+import { DrawerDemo } from "./drawer";
 export default function Blog({ data, UserProfile }) {
   const [compareLink, setCompareLink] = React.useState("");
+  const [open, setOpen] = React.useState(false);
   const [aiData, setAiData] = React.useState("");
   const { title, brief, coverImage, slug, url, content } = data;
   const { name, photo, tagline, username } = UserProfile;
@@ -38,6 +41,7 @@ export default function Blog({ data, UserProfile }) {
         height: "250px",
       }}
     >
+      {open ? <DrawerDemo open={open} onOpenChange={setOpen} /> : null}
       <a
         href="#"
         style={{
@@ -126,7 +130,7 @@ export default function Blog({ data, UserProfile }) {
                 marginTop: "-7px",
               }}
             >
-              Share
+              Compare
             </Button>
           </DialogTrigger>
           <DialogContent
@@ -164,11 +168,12 @@ export default function Blog({ data, UserProfile }) {
                 <CopyIcon className="h-4 w-4" />
               </Button> */}
             </div>
+
             <DialogFooter className="sm:justify-start">
               <DialogClose asChild>
                 <Button
                   onClick={() => {
-                    alert(compareLink);
+                    setOpen(true);
                   }}
                   type="button"
                   variant="primary"

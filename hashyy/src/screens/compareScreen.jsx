@@ -68,27 +68,9 @@ export default function Compare() {
           marginTop: 30,
         }}
       >
-        <Drawer style={{}}>
-          <DrawerTrigger>Open</DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-              <DrawerDescription>
-                <div>
-                  <p>Hello</p>
-                </div>{" "}
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <Button>Submit</Button>
-              <DrawerClose>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
+        <Navbar />
       </div>
-      {/* <div
+      <div
         style={{
           width: "70%",
           marginTop: "3rem",
@@ -118,7 +100,7 @@ export default function Compare() {
           Content Understanding. Uncover AI Descriptions, Analyze Sentiments,
           and Compare Blogs seamlessly!
         </p>{" "}
-      </div> */}
+      </div>
       <div
         style={{
           alignSelf: "center",
