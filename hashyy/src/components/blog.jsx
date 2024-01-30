@@ -3,8 +3,25 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+
+import { CopyIcon } from "@radix-ui/react-icons";
+
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import AiSummerise from "./api/aiSummerise";
 export default function Blog({ data, UserProfile }) {
+  const [compareLink, setCompareLink] = React.useState("");
   const [aiData, setAiData] = React.useState("");
   const { title, brief, coverImage, slug, url, content } = data;
   const { name, photo, tagline, username } = UserProfile;
@@ -98,17 +115,74 @@ export default function Blog({ data, UserProfile }) {
             </span>
           </button>
         </Link>
-        <button
-          style={{
-            width: "11rem",
-            height: "2.5rem",
-            marginTop: "-7px",
-          }}
-          type="button"
-          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Compare
-        </button>
+
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              style={{
+                width: "11rem",
+                height: "2.5rem",
+                marginTop: "-7px",
+              }}
+            >
+              Share
+            </Button>
+          </DialogTrigger>
+          <DialogContent
+            className="sm:max-w-md"
+            style={{
+              backgroundColor: "white",
+            }}
+          >
+            <DialogHeader>
+              <DialogTitle> </DialogTitle>
+              <DialogDescription
+                style={{
+                  color: "black",
+                }}
+              >
+                Paste the Hashnode Blog's Link to compare.{" "}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex items-center space-x-2">
+              <div className="grid flex-1 gap-2">
+                <Label htmlFor="link" className="sr-only">
+                  Link
+                </Label>
+                <Input
+                  type="text"
+                  onChange={(e) => {
+                    setCompareLink(e.target.value);
+                  }}
+                  id="link"
+                  defaultValue="https://ui.shadcn.com/docs/installation"
+                />
+              </div>
+              {/* <Button type="submit" size="sm" className="px-3">
+                <span className="sr-only">Copy</span>
+                <CopyIcon className="h-4 w-4" />
+              </Button> */}
+            </div>
+            <DialogFooter className="sm:justify-start">
+              <DialogClose asChild>
+                <Button
+                  onClick={() => {
+                    alert(compareLink);
+                  }}
+                  type="button"
+                  variant="primary"
+                  style={{
+                    backgroundColor: "#0F172A",
+                    color: "#fff",
+                  }}
+                >
+                  Submit
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
         {/* <div
           onClick={() => {

@@ -2,6 +2,18 @@ import React from "react";
 import Navbar from "../components/navbar";
 import { ToastContainer } from "react-toastify";
 import Charts from "../components/charts";
+import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
 export default function Compare() {
   const columnContainerStyle = {
     display: "flex",
@@ -56,7 +68,25 @@ export default function Compare() {
           marginTop: 30,
         }}
       >
-        <Navbar />
+        <Drawer style={{}}>
+          <DrawerTrigger>Open</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Are you absolutely sure?</DrawerTitle>
+              <DrawerDescription>
+                <div>
+                  <p>Hello</p>
+                </div>{" "}
+              </DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <Button>Submit</Button>
+              <DrawerClose>
+                <Button variant="outline">Cancel</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </div>
       {/* <div
         style={{
