@@ -26,7 +26,7 @@ export default function Dashboard() {
     console.log(posts);
   }, [posts]);
   const getSearchUser = async (e) => {
-    toast.info("Searching For User");
+    toast.info("Searching  User");
 
     e.preventDefault();
     const retrivedData = await getSearchUserData(searchedUser);
