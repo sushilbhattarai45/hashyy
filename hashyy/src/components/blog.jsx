@@ -33,21 +33,22 @@ export default function Blog({ data, UserProfile }) {
   //Route Data
   const { title, brief, coverImage, slug, url, content } = data;
   const { name, photo, tagline, username } = UserProfile;
-  //All User and Post Data
+  const [actualPost, setActualPost] = React.useState(data);
+  const [comparingPost, setComparingPost] = React.useState({});
+  //All Pots's User Data
   const [actualBlogUserData, setActualBlogUserData] = React.useState({});
   const [comparingBlogUserData, setComparingBlogUserData] = React.useState({});
+
   async function getAiData() {
     const aiText = await AiSummerise(content.markdown);
     setAiData(aiText);
-    console.log("hi");
-    console.log(comparingBlogUserData);
   }
 
   async function getPostFromURL() {
     setAiData("");
     setComparingPostAiData("");
     const urldata = await getPostDataFromURL(compareLink);
-
+    setComparingPost(urldata.publication.post);
     //senfing for summerization
     const aiTextForComparingBlog = await AiSummerise(
       urldata.publication.post.content.markdown
@@ -74,6 +75,8 @@ export default function Blog({ data, UserProfile }) {
           comparingBlogData={comparingPostAiData}
           actualBlogData={aiData}
           onOpenChange={setOpen}
+          actualBlog={data}
+          comparingBlog={comparingPost}
         />
       ) : null}
       <a

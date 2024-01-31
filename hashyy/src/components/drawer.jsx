@@ -10,14 +10,13 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
-
+import { Link } from "react-router-dom";
 export function DrawerDemo(props) {
-  console.log(props);
   const { actualBlogUserData, comparingBlogUserData } = props;
 
   const [open, setOpen] = React.useState(props.open);
 
-  const SubColumn = ({ imageSrc, color, title, user, description }) => {
+  const SubColumn = ({ imageSrc, url, color, title, user, description }) => {
     return (
       <div
         style={{
@@ -100,16 +99,18 @@ export function DrawerDemo(props) {
                   Analyze Content
                 </span>
               </button>
-              <button
-                style={{
-                  width: "11rem",
-                  height: "2.5rem",
-                }}
-                type="button"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Hashnode
-              </button>
+              <Link to={url}>
+                <button
+                  style={{
+                    width: "11rem",
+                    height: "2.5rem",
+                  }}
+                  type="button"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Hashnode
+                </button>
+              </Link>
             </div>
           </div>
 
@@ -126,7 +127,7 @@ export function DrawerDemo(props) {
                 padding: "0",
               }}
             >
-              Authentication and Authorization concepts you must know
+              {title}{" "}
             </p>{" "}
             <p
               style={{
@@ -176,17 +177,19 @@ export function DrawerDemo(props) {
         }}
       >
         <SubColumn
+          url={props.actualBlog.url}
           user={actualBlogUserData.user}
-          imageSrc={column1.imageSrc}
-          title={column1.title}
+          imageSrc={props.actualBlog.coverImage?.url}
+          title={props.actualBlog.title}
           color={"#f0f0f0"}
           description={props.actualBlogData}
         />
         <SubColumn
+          url={props.comparingBlog.url}
           user={comparingBlogUserData}
           color={"#f0f0f0"}
-          imageSrc={column2.imageSrc}
-          title={column2.title}
+          imageSrc={props.comparingBlog.coverImage?.url}
+          title={props.comparingBlog.title}
           description={props.comparingBlogData}
         />
       </div>

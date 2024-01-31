@@ -14,12 +14,27 @@ export async function getPostDataFromURL(url) {
       publication(host: $host) {
         isTeam
         title
+
         author {
           username
           name
           profilePicture
         }
         post(slug: $slug) {
+          comments(first: 20) {
+            edges {
+              node {
+                id
+                content {
+                  markdown
+                }
+              }
+            }
+          }
+          url
+          coverImage {
+            url
+          }
           title
           content {
             markdown

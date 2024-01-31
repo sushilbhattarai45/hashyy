@@ -22,7 +22,6 @@ export default function UserProfile(user) {
     month: "short",
     year: "numeric",
   });
-  console.log(socialMediaLinks);
   let url = publications.edges[0].node.url;
   const finalurl = url.split("https://")[1];
 
