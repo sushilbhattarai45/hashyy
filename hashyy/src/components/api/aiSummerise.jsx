@@ -11,7 +11,7 @@ export default async function AiSummerise(text) {
     },
     data: {
       query:
-        "Hey can you do this task for me, please. Summerize this blog  in not more 70 words but not more than 80 words. Dont answer anything rather than the beautifuyl summary itself. No links too :" +
+        "Hey can you do this task for me, please. Summerize this blog  in not less than 70 words but not more than 90 words. Word limit is strictly 100 words. Dont answer anything rather than the beautifull summary itself. No links too :" +
         text,
     },
   };

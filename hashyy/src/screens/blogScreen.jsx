@@ -9,6 +9,15 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Charts from "../components/charts";
@@ -48,6 +57,7 @@ export default function BlogScreen(props) {
         display: "flex",
         flexDirection: "column",
         flex: 1,
+        height: "100vh",
         width: "100vw",
         backgroundColor: "#0F172A",
       }}
@@ -155,27 +165,121 @@ export default function BlogScreen(props) {
                 justifyContent: "center",
               }}
             >
-              <Link
-                to={".."}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate(-1);
-                }}
-              >
-                <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                  <span
-                    style={{
-                      backgroundColor: "#0F172A",
-                      color: "#fff",
-                      width: "11rem",
-                      height: "2.3rem",
-                    }}
-                    class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
-                  >
-                    Back{" "}
-                  </span>
-                </button>
-              </Link>
+              <Dialog>
+                <DialogTrigger>
+                  {" "}
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <span
+                      style={{
+                        backgroundColor: "#0F172A",
+                        color: "#fff",
+                        width: "11rem",
+                        height: "2.3rem",
+                      }}
+                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                    >
+                      Analyze Comments
+                    </span>
+                  </button>
+                </DialogTrigger>
+                <DialogContent
+                  style={{
+                    borderColor: "#0F172A",
+                    borderWidth: "2px",
+                  }}
+                >
+                  <DialogHeader>
+                    <DialogTitle>
+                      AI Powered Comment's Sentiment Analyzer{" "}
+                    </DialogTitle>
+                    <DialogDescription
+                      style={{
+                        marginTop: 6,
+                        alignContent: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+
+                        display: "flex",
+                        flex: 1,
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          width: "100%",
+                          flex: 1,
+                          flexDirection: "row",
+                        }}
+                      >
+                        {" "}
+                        <div
+                          style={{
+                            display: "flex",
+                            flex: 0.5,
+                            alignSelf: "center",
+                            width: "50%",
+                          }}
+                        >
+                          {" "}
+                          {data.comments.edges?.length > 0 ? (
+                            <Charts style={{}} sData={sentimentsData} />
+                          ) : (
+                            <div>
+                              <p
+                                style={{
+                                  marginTop: 6,
+                                }}
+                              >
+                                {" "}
+                                No Comments To Analyse
+                              </p>
+                              <br />{" "}
+                              <p
+                                style={{
+                                  color: "black",
+                                  fontSize: "0.9rem",
+                                  fontWeight: "700",
+                                  fontFamily: "Poppins",
+                                  marginTop: "-10px",
+                                  padding: "0",
+                                }}
+                              >
+                                Total Comments : {data.comments.edges?.length}
+                                <br />{" "}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        {data.comments.edges?.length > 0 ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              flex: 0.5,
+                              marginTop: "1rem",
+                              marginLeft: "5px",
+                            }}
+                          >
+                            {" "}
+                            <p
+                              style={{
+                                color: "black",
+                                fontSize: "0.9rem",
+                                fontWeight: "700",
+                                fontFamily: "Poppins",
+                                margin: "0",
+                                padding: "0",
+                              }}
+                            >
+                              {/* Total Comments : {comments?.length} */}
+                            </p>
+                          </div>
+                        ) : null}
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
               <Link to={data?.url}>
                 <button
                   style={{
@@ -257,7 +361,7 @@ export default function BlogScreen(props) {
             )}
           </div>
         </div>
-        <div
+        {/* <div
           style={{
             alignSelf: "center",
             alignContent: "center",
@@ -284,8 +388,8 @@ export default function BlogScreen(props) {
           >
             Comments Analyzer{" "}
           </p>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           style={{
             alignSelf: "center",
             alignContent: "center",
@@ -380,7 +484,7 @@ export default function BlogScreen(props) {
               PS: This post has no comments
             </p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

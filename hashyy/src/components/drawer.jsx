@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -9,14 +9,54 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import Charts from "./charts";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-export function DrawerDemo(props) {
-  const { actualBlogUserData, comparingBlogUserData } = props;
+import Sentiments from "./api/sentimentAnayzer";
 
+export function DrawerDemo(props) {
+  const [sentimentsData, setSentimentsData] = useState([]);
+  const [actualBlogSentimentData, setActualBlogSentimentData] = useState([]);
+  const [comparingBlogSentimentData, setComparingBlogSentimentData] = useState(
+    []
+  );
+  const { actualBlogUserData, comparingBlogUserData } = props;
+  useEffect(() => {
+    getSentimentData();
+  }, [props.open]);
+  async function getSentimentData() {
+    const fetchActualBlogSentimentsData = await Sentiments(
+      props.actualBlog.comments.edges
+    );
+
+    setActualBlogSentimentData(fetchActualBlogSentimentsData);
+    const fetchComparingBlogSentimentData = await Sentiments(
+      props.comparingBlog.comments.edges
+    );
+    setComparingBlogSentimentData(fetchComparingBlogSentimentData);
+  }
   const [open, setOpen] = React.useState(props.open);
 
-  const SubColumn = ({ imageSrc, url, color, title, user, description }) => {
+  const SubColumn = ({
+    imageSrc,
+    url,
+    comments,
+    color,
+    title,
+    user,
+    sentiments,
+    description,
+  }) => {
+    console.log("user");
     return (
       <div
         style={{
@@ -55,7 +95,7 @@ export function DrawerDemo(props) {
             backgroundColor: color,
             display: "flex",
             flex: 1,
-            height: "400px",
+            height: "420px",
 
             flexDirection: "row",
             padding: "20px",
@@ -86,19 +126,122 @@ export function DrawerDemo(props) {
                 display: "flex",
               }}
             >
-              <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span
+              <Dialog>
+                <DialogTrigger>
+                  {" "}
+                  <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                    <span
+                      style={{
+                        backgroundColor: "#0F172A",
+                        color: "#fff",
+                        width: "11rem",
+                        height: "2.3rem",
+                      }}
+                      className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+                    >
+                      Analyze Comments
+                    </span>
+                  </button>
+                </DialogTrigger>
+                <DialogContent
                   style={{
-                    backgroundColor: "#0F172A",
-                    color: "#fff",
-                    width: "11rem",
-                    height: "2.3rem",
+                    borderColor: "#0F172A",
+                    borderWidth: "2px",
                   }}
-                  className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
                 >
-                  Analyze Content
-                </span>
-              </button>
+                  <DialogHeader>
+                    <DialogTitle>
+                      AI Powered Comment's Sentiment Analyzer{" "}
+                    </DialogTitle>
+                    <DialogDescription
+                      style={{
+                        marginTop: 6,
+                        alignContent: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+
+                        display: "flex",
+                        flex: 1,
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          width: "100%",
+                          flex: 1,
+                          flexDirection: "row",
+                        }}
+                      >
+                        {" "}
+                        <div
+                          style={{
+                            display: "flex",
+                            flex: 0.5,
+                            alignSelf: "center",
+                            width: "50%",
+                          }}
+                        >
+                          {" "}
+                          {comments.length > 0 ? (
+                            <Charts style={{}} sData={sentiments} />
+                          ) : (
+                            <div>
+                              <p
+                                style={{
+                                  marginTop: 6,
+                                }}
+                              >
+                                {" "}
+                                No Comments To Analyse
+                              </p>
+                              <br />{" "}
+                              <p
+                                style={{
+                                  color: "black",
+                                  fontSize: "0.9rem",
+                                  fontWeight: "700",
+                                  fontFamily: "Poppins",
+                                  marginTop: "-10px",
+                                  padding: "0",
+                                }}
+                              >
+                                Total Comments : {comments?.length}
+                                <br />{" "}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        {comments?.length > 0 ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              flex: 0.5,
+                              marginTop: "1rem",
+                              marginLeft: "5px",
+                            }}
+                          >
+                            {" "}
+                            <p
+                              style={{
+                                color: "black",
+                                fontSize: "0.9rem",
+                                fontWeight: "700",
+                                fontFamily: "Poppins",
+                                margin: "0",
+                                padding: "0",
+                              }}
+                            >
+                              Total Comments : {comments?.length}
+                            </p>
+                          </div>
+                        ) : null}
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+
               <Link to={url}>
                 <button
                   style={{
@@ -177,21 +320,26 @@ export function DrawerDemo(props) {
         }}
       >
         <SubColumn
+          sentiments={actualBlogSentimentData}
           url={props.actualBlog.url}
           user={actualBlogUserData.user}
+          comments={props.actualBlog.comments.edges}
           imageSrc={props.actualBlog.coverImage?.url}
           title={props.actualBlog.title}
           color={"#f0f0f0"}
           description={props.actualBlogData}
         />
         <SubColumn
+          sentiments={comparingBlogSentimentData}
           url={props.comparingBlog.url}
           user={comparingBlogUserData}
           color={"#f0f0f0"}
+          comments={props.comparingBlog.comments.edges}
           imageSrc={props.comparingBlog.coverImage?.url}
           title={props.comparingBlog.title}
           description={props.comparingBlogData}
         />
+        {/* <Charts sData={sentimentsData} /> */}
       </div>
     );
   };
@@ -221,23 +369,29 @@ export function DrawerDemo(props) {
         <DrawerHeader>
           <DrawerTitle
             style={{
-              marginLeft: "10px",
+              marginLeft: "5px",
+              marginBottom: "10px",
             }}
           >
             Blogs Comparision{" "}
           </DrawerTitle>
-          <DrawerDescription>
+          <DrawerDescription
+            style={{
+              borderRadius: "10px",
+            }}
+          >
             <MainColumn column1={mainColumn1} column2={mainColumn2} />
           </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
-          <Button>Analyze Comments Sentiments</Button>
           <DrawerClose>
             <Button
+              style={{
+                width: "100%",
+              }}
               onClick={() => {
                 setOpen(!open);
               }}
-              variant="outline"
             >
               Cancel
             </Button>
