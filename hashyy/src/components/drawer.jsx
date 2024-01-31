@@ -12,11 +12,19 @@ import {
 import { Button } from "@/components/ui/button";
 
 export function DrawerDemo(props) {
+  console.log(props);
+  const { actualBlogUserData, comparingBlogUserData } = props;
+
   const [open, setOpen] = React.useState(props.open);
 
-  const SubColumn = ({ imageSrc, color, title, description }) => {
+  const SubColumn = ({ imageSrc, color, title, user, description }) => {
     return (
-      <div>
+      <div
+        style={{
+          width: "100%",
+          position: "relative",
+        }}
+      >
         <figure
           class="max-w-screen-md"
           style={{
@@ -26,7 +34,7 @@ export function DrawerDemo(props) {
           <figcaption class="flex items-center mt-6 space-x-3 rtl:space-x-reverse">
             <img
               class="w-6 h-6 rounded-full"
-              src="https://cdn.hashnode.com/res/hashnode/image/upload/v1696817918392/L30XcRGpk.jpeg"
+              src={user.profilePicture}
               alt="profile picture"
             />
             <div class="flex items-center divide-x-2 rtl:divide-x-reverse divide-gray-300 dark:divide-gray-700">
@@ -34,10 +42,10 @@ export function DrawerDemo(props) {
                 style={{ color: "black" }}
                 class="pe-3 font-medium text-gray-900 dark:text-white"
               >
-                Sushil Bhattarai
+                {user.name}
               </cite>
               <cite class="ps-3 text-sm text-gray-500 dark:text-gray-400">
-                @sushil_bhattarai45
+                @{user.username}{" "}
               </cite>
             </div>
           </figcaption>
@@ -46,14 +54,17 @@ export function DrawerDemo(props) {
         <div
           style={{
             backgroundColor: color,
-            width: "100%",
             display: "flex",
+            flex: 1,
+            height: "400px",
+
             flexDirection: "row",
             padding: "20px",
           }}
         >
           <div
             style={{
+              flex: 1,
               width: "50%",
               marginRight: "20px",
             }}
@@ -64,7 +75,7 @@ export function DrawerDemo(props) {
               alt="Banner"
               style={{
                 width: "100%",
-                height: 250,
+                height: 200,
                 marginRight: "20px",
                 borderRadius: "8px",
               }}
@@ -102,13 +113,13 @@ export function DrawerDemo(props) {
             </div>
           </div>
 
-          <div style={{ width: "50%" }}>
+          <div style={{ width: "50%", flex: 1 }}>
             <p
               style={{
                 color: "black",
                 fontSize: "1rem",
                 fontWeight: "bold",
-                width: "100%",
+
                 marginTop: "0.7rem",
                 fontFamily: "Poppins",
                 margin: "0",
@@ -121,6 +132,7 @@ export function DrawerDemo(props) {
               style={{
                 marginTop: "1.3rem",
                 textAlign: "left",
+                width: "100%",
                 color: "black",
                 fontSize: "0.8rem",
                 fontWeight: "500",
@@ -128,19 +140,7 @@ export function DrawerDemo(props) {
                 padding: "0",
               }}
             >
-              <em>
-                {" "}
-                Summary: This blog post discusses the "Cannot set headers after
-                they are sent to the client" error in node.js and express. The
-                author shares their experience with encountering this error and
-                provides steps to fix it. The root cause of the error is
-                identified as improperly written asynchronous code that allows
-                multiple branches to send a response. Examples of code snippets
-                causing this error are also provided, along with the correct
-                approach to fixing them. The post concludes with the author's
-                call-to-action, inviting readers to share their own
-                troubleshooting experiences.
-              </em>
+              <em> {description}</em>
               <br /> <br />-
               <span
                 style={{
@@ -168,21 +168,26 @@ export function DrawerDemo(props) {
           display: "flex",
           flex: 1,
           width: "100%",
-          justifyContent: "space-around",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+
           backgroundColor: "#f0f0f0",
         }}
       >
         <SubColumn
+          user={actualBlogUserData.user}
           imageSrc={column1.imageSrc}
           title={column1.title}
           color={"#f0f0f0"}
-          description={column1.description}
+          description={props.actualBlogData}
         />
         <SubColumn
+          user={comparingBlogUserData}
           color={"#f0f0f0"}
           imageSrc={column2.imageSrc}
           title={column2.title}
-          description={column2.description}
+          description={props.comparingBlogData}
         />
       </div>
     );

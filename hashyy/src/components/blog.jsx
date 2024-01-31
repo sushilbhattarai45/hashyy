@@ -22,17 +22,42 @@ import { Label } from "@/components/ui/label";
 import AiSummerise from "./api/aiSummerise";
 import { Drawer } from "@mui/material";
 import { DrawerDemo } from "./drawer";
+import { getPostDataFromURL } from "./api/getPostFromUrl";
 export default function Blog({ data, UserProfile }) {
   const [compareLink, setCompareLink] = React.useState("");
   const [open, setOpen] = React.useState(false);
+
+  //Ai summerized response
   const [aiData, setAiData] = React.useState("");
+  const [comparingPostAiData, setComparingPostAiData] = React.useState("");
+  //Route Data
   const { title, brief, coverImage, slug, url, content } = data;
   const { name, photo, tagline, username } = UserProfile;
+  //All User and Post Data
+  const [actualBlogUserData, setActualBlogUserData] = React.useState({});
+  const [comparingBlogUserData, setComparingBlogUserData] = React.useState({});
   async function getAiData() {
     const aiText = await AiSummerise(content.markdown);
     setAiData(aiText);
+    console.log("hi");
+    console.log(comparingBlogUserData);
   }
 
+  async function getPostFromURL() {
+    setAiData("");
+    setComparingPostAiData("");
+    const urldata = await getPostDataFromURL(compareLink);
+
+    //senfing for summerization
+    const aiTextForComparingBlog = await AiSummerise(
+      urldata.publication.post.content.markdown
+    );
+
+    setComparingBlogUserData(urldata.publication.author);
+    await getAiData();
+    setComparingPostAiData(aiTextForComparingBlog);
+    setOpen(true);
+  }
   return (
     <div
       class=" border border-gray-200 rounded-lg shadow dark:border-gray-700 dark:bg-gray-800 "
@@ -41,7 +66,16 @@ export default function Blog({ data, UserProfile }) {
         height: "250px",
       }}
     >
-      {open ? <DrawerDemo open={open} onOpenChange={setOpen} /> : null}
+      {open ? (
+        <DrawerDemo
+          actualBlogUserData={UserProfile}
+          comparingBlogUserData={comparingBlogUserData}
+          open={open}
+          comparingBlogData={comparingPostAiData}
+          actualBlogData={aiData}
+          onOpenChange={setOpen}
+        />
+      ) : null}
       <a
         href="#"
         style={{
@@ -172,8 +206,9 @@ export default function Blog({ data, UserProfile }) {
             <DialogFooter className="sm:justify-start">
               <DialogClose asChild>
                 <Button
-                  onClick={() => {
-                    setOpen(true);
+                  onClick={async () => {
+                    setOpen(false);
+                    await getPostFromURL();
                   }}
                   type="button"
                   variant="primary"

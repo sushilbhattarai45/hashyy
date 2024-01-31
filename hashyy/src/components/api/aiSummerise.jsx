@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 export default async function AiSummerise(text) {
+  console.log(text);
   const options = {
     method: "POST",
     url: "https://chatgpt-gpt-3-5.p.rapidapi.com/ask",
@@ -11,13 +12,14 @@ export default async function AiSummerise(text) {
     },
     data: {
       query:
-        "Summerize this blog post for me and also remove  html elemnts from you response in not more than 100 words" +
+        "Hey can you do this task for me, please. Summerize this blog  in not more 70 words but not more than 80 words. Dont answer anything rather than the beautifuyl summary itself. No links too :" +
         text,
     },
   };
 
   try {
     const response = await axios.request(options);
+    console.log(response);
     return response.data.response;
   } catch (error) {
     console.error(error);
