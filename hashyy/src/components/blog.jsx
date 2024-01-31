@@ -115,7 +115,7 @@ export default function Blog({ data, UserProfile }) {
                     fontFamily: "Poppins",
                   }}
                 >
-                  Making an Effective Comparision
+                  Drafting an Effective Comparision
                 </p>
               </DialogTitle>
               <DialogDescription>

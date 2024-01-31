@@ -26,7 +26,6 @@ export default function Dashboard(props) {
   const [isRealUser, setIsRealUser] = useState(false);
 
   useEffect(() => {
-    test();
     if (localStorage.getItem("username") != null) {
       let prevUser = localStorage.getItem("username");
       // setSearchedUser(prevUser);
@@ -36,7 +35,7 @@ export default function Dashboard(props) {
   }, []);
 
   const getSearchUser = async (user) => {
-    toast.info("Searching  User");
+    toast.info("Searching User");
     if (user != "") {
       localStorage.setItem("username", user);
       // e.preventDefault();
@@ -44,7 +43,6 @@ export default function Dashboard(props) {
       setUser(retrivedData);
       if (retrivedData.user != null) {
         toast.success("User Found!");
-        console.log(retrivedData);
         setIsRealUser(true);
         console.log(retrivedData);
         let url = retrivedData.user.publications.edges[0].node.url;
@@ -60,9 +58,7 @@ export default function Dashboard(props) {
       setPosts([]);
     }
   };
-  async function test() {
-    console.log("test");
-  }
+
   return (
     <div
       style={{
