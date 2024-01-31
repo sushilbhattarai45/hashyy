@@ -16,34 +16,53 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DrawerDemo } from "@/components/drawer";
+import { useLocation } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  const location = useLocation();
   const [searchedUser, setSearchedUser] = useState("");
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState({});
   const [isRealUser, setIsRealUser] = useState(false);
 
   useEffect(() => {
-    console.log(posts);
-  }, [posts]);
-  const getSearchUser = async (e) => {
-    toast.info("Searching  User");
+    test();
+    if (localStorage.getItem("username") != null) {
+      let prevUser = localStorage.getItem("username");
+      // setSearchedUser(prevUser);
+      getSearchUser(prevUser);
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
-    e.preventDefault();
-    const retrivedData = await getSearchUserData(searchedUser);
-    setUser(retrivedData);
-    if (retrivedData.user != null) {
-      toast.success("User Found!");
-      setIsRealUser(true);
-      console.log(retrivedData);
-      let url = retrivedData.user.publications.edges[0].node.url;
-      let result = url.split("https://")[1];
-      const retrivedPosts = await getUserPost(result);
-      setPosts(retrivedPosts);
+  const getSearchUser = async (user) => {
+    toast.info("Searching  User");
+    if (user != "") {
+      localStorage.setItem("username", user);
+      // e.preventDefault();
+      const retrivedData = await getSearchUserData(user);
+      setUser(retrivedData);
+      if (retrivedData.user != null) {
+        toast.success("User Found!");
+        console.log(retrivedData);
+        setIsRealUser(true);
+        console.log(retrivedData);
+        let url = retrivedData.user.publications.edges[0].node.url;
+        let result = url.split("https://")[1];
+        const retrivedPosts = await getUserPost(result);
+        setPosts(retrivedPosts);
+      } else {
+        toast.error("User Not Found!");
+      }
     } else {
-      toast.error("User Not Found!");
+      toast.error("Please Enter a Valid Username!");
+      setIsRealUser(false);
+      setPosts([]);
     }
   };
+  async function test() {
+    console.log("test");
+  }
   return (
     <div
       style={{
@@ -149,7 +168,7 @@ export default function Dashboard() {
             <label>Hashnode Username</label>
           </div>
 
-          <form class="flex items-center">
+          <div class="flex items-center">
             <label for="voice-search" class="sr-only">
               Search
             </label>
@@ -176,6 +195,7 @@ export default function Dashboard() {
                 style={{
                   height: "3rem",
                 }}
+                defaultValue={localStorage.getItem("username")}
                 type="text"
                 id="voice-search"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -184,7 +204,7 @@ export default function Dashboard() {
               />
             </div>
             <button
-              onClick={(e) => getSearchUser(e)}
+              onClick={(e) => getSearchUser(searchedUser)}
               style={{
                 height: "3rem",
               }}
@@ -208,7 +228,7 @@ export default function Dashboard() {
               </svg>
               Search
             </button>
-          </form>
+          </div>
         </div>
 
         <div
