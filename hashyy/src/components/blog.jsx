@@ -252,7 +252,7 @@ export default function Blog({ data, UserProfile }) {
                     setCompareLink(e.target.value);
                   }}
                   id="link"
-                  defaultValue="https://ui.shadcn.com/docs/installation"
+                  defaultValue="https://sushilbhattarai.hashnode.dev/debuggingfeb-a-story-of-the-scariest-deadline-i-ever-got-into"
                 />
               </div>
               {/* <Button type="submit" size="sm" className="px-3">
