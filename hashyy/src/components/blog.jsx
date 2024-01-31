@@ -3,9 +3,11 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { isWebUri } from "valid-url";
 
 import { CopyIcon } from "@radix-ui/react-icons";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -57,21 +59,29 @@ export default function Blog({ data, UserProfile }) {
   }
 
   async function getPostFromURL() {
+    // console.log(!isWebUri(compareLink));
     setShowLottie(true);
     setAiData("");
     setComparingPostAiData("");
+    console.log;
     const urldata = await getPostDataFromURL(compareLink);
-    setComparingPost(urldata.publication.post);
-    //senfing for summerization
-    const aiTextForComparingBlog = await AiSummerise(
-      urldata.publication.post.content.markdown
-    );
 
-    setComparingBlogUserData(urldata.publication.author);
-    await getAiData();
-    setComparingPostAiData(aiTextForComparingBlog);
-    setShowLottie(false);
-    setOpen(true);
+    if (urldata.publication.post != null) {
+      setComparingPost(urldata.publication.post);
+      //senfing for summerization
+      const aiTextForComparingBlog = await AiSummerise(
+        urldata.publication.post.content.markdown
+      );
+
+      setComparingBlogUserData(urldata.publication.author);
+      await getAiData();
+      setComparingPostAiData(aiTextForComparingBlog);
+      setShowLottie(false);
+      setOpen(true);
+    } else {
+      toast.error("Invalid URL");
+      setShowLottie(false);
+    }
   }
   return (
     <div
@@ -122,6 +132,7 @@ export default function Blog({ data, UserProfile }) {
           </DialogContent>
         </Dialog>
       </div>
+
       {open ? (
         <DrawerDemo
           actualBlogUserData={UserProfile}
@@ -247,12 +258,12 @@ export default function Blog({ data, UserProfile }) {
                   Link
                 </Label>
                 <Input
-                  type="text"
+                  type="url"
                   onChange={(e) => {
                     setCompareLink(e.target.value);
                   }}
                   id="link"
-                  defaultValue="https://sushilbhattarai.hashnode.dev/debuggingfeb-a-story-of-the-scariest-deadline-i-ever-got-into"
+                  placeholder="https://sushilbhattarai.hashnode.dev/debuggingfeb-a-story-of-the-scariest-deadline-i-ever-got-into"
                 />
               </div>
               {/* <Button type="submit" size="sm" className="px-3">

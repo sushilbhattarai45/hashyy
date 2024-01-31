@@ -36,6 +36,7 @@
     "recharts": "^2.11.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
+    "valid-url": "^1.0.9",
     "vaul": "^0.8.9"
   },
   "devDependencies": {

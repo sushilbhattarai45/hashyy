@@ -271,7 +271,7 @@ export default function BlogScreen(props) {
                                 padding: "0",
                               }}
                             >
-                              {/* Total Comments : {comments?.length} */}
+                              Total Comments : {data.comments.edges?.length}
                             </p>
                           </div>
                         ) : null}
