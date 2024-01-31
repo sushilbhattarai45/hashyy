@@ -23,7 +23,18 @@ import AiSummerise from "./api/aiSummerise";
 import { Drawer } from "@mui/material";
 import { DrawerDemo } from "./drawer";
 import { getPostDataFromURL } from "./api/getPostFromUrl";
+import Lottie from "react-lottie";
+import animationData from "../assets/Loading-lottie.json";
 export default function Blog({ data, UserProfile }) {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   const [compareLink, setCompareLink] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
@@ -39,12 +50,14 @@ export default function Blog({ data, UserProfile }) {
   const [actualBlogUserData, setActualBlogUserData] = React.useState({});
   const [comparingBlogUserData, setComparingBlogUserData] = React.useState({});
 
+  const [showLottie, setShowLottie] = React.useState(false);
   async function getAiData() {
     const aiText = await AiSummerise(content.markdown);
     setAiData(aiText);
   }
 
   async function getPostFromURL() {
+    setShowLottie(true);
     setAiData("");
     setComparingPostAiData("");
     const urldata = await getPostDataFromURL(compareLink);
@@ -57,6 +70,7 @@ export default function Blog({ data, UserProfile }) {
     setComparingBlogUserData(urldata.publication.author);
     await getAiData();
     setComparingPostAiData(aiTextForComparingBlog);
+    setShowLottie(false);
     setOpen(true);
   }
   return (
@@ -67,6 +81,47 @@ export default function Blog({ data, UserProfile }) {
         height: "250px",
       }}
     >
+      <div>
+        <Dialog open={showLottie}>
+          <DialogContent
+            style={{
+              width: "30%",
+              alignContent: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          >
+            <DialogHeader>
+              <DialogTitle>
+                {" "}
+                <p
+                  style={{
+                    color: "black",
+                    fontSize: "1rem",
+                    fontWeight: "500",
+                    width: "100%",
+                    textAlign: "center",
+                    fontFamily: "Poppins",
+                  }}
+                >
+                  Making an Effective Comparision
+                </p>
+              </DialogTitle>
+              <DialogDescription>
+                <Lottie
+                  style={{
+                    marginTop: "-20px",
+                  }}
+                  options={defaultOptions}
+                  height={200}
+                  width={300}
+                />
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+      </div>
       {open ? (
         <DrawerDemo
           actualBlogUserData={UserProfile}

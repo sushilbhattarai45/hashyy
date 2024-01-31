@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DrawerDemo } from "@/components/drawer";
+
 export default function Dashboard() {
   const [searchedUser, setSearchedUser] = useState("");
   const [posts, setPosts] = useState([]);

@@ -14,7 +14,22 @@ export default function Navbar() {
         <Link to="../">
           <a class="flex items-center space-x-3 rtl:space-x-reverse">
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-              <p style={{ marginLeft: "40px" }}>Hashyyy</p>
+              <p
+                style={{
+                  color: "#646cff",
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                  width: "100%",
+                  textAlign: "center",
+                  fontFamily: "Poppins",
+                  margin: "0",
+                  padding: "0",
+                }}
+              >
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                  <p style={{ marginLeft: "46px", fontSize: "32px" }}>Hashyy</p>
+                </span>{" "}
+              </p>{" "}
             </span>
           </a>
         </Link>
