@@ -19,12 +19,14 @@ export default async function Sentiments(data) {
   data.map(async (item) => {
     const options = {
       method: "POST",
-      url: "https://sentiment-analysis9.p.rapidapi.com/sentiment",
+      url: import.meta.env.VITE_AI_SENTIMENT_ANALYZER_URL,
       headers: {
         "content-type": "application/json",
         Accept: "application/json",
-        "X-RapidAPI-Key": "e562bb25b0msh1aefa205d9a60ecp1267d1jsn87a941f095f9",
-        "X-RapidAPI-Host": "sentiment-analysis9.p.rapidapi.com",
+        "X-RapidAPI-Key": import.meta.env
+          .VITE_AI_SENTIMENT_ANALYZER_X_RapidAPI_Key,
+        "X-RapidAPI-Host": import.meta.env
+          .VITE_AI_SENTIMENT_ANALYZER_X_RapidAPI_Host,
       },
       data: [
         {

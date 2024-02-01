@@ -36,6 +36,7 @@ export default function BlogScreen(props) {
     getAiData();
     window.scrollTo(0, 0);
   }, [location]);
+
   async function getSentimentData() {
     toast.info("Loading Comments Sentiments!");
     const fetchSentimentsData = await Sentiments(data.comments.edges);

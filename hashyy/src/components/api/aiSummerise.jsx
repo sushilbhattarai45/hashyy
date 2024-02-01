@@ -3,11 +3,11 @@ import axios from "axios";
 export default async function AiSummerise(text) {
   const options = {
     method: "POST",
-    url: "https://chatgpt-gpt-3-5.p.rapidapi.com/ask",
+    url: import.meta.env.VITE_AI_SUMMERIZATION_API_URL,
     headers: {
       "content-type": "application/json",
-      "X-RapidAPI-Key": "699ea8e4admsha947a620bc04ad1p16131ajsncd08755dae31",
-      "X-RapidAPI-Host": "chatgpt-gpt-3-5.p.rapidapi.com",
+      "X-RapidAPI-Key": import.meta.env.VITE_AI_SUMMERIZATION_X_RapidAPI_Key,
+      "X-RapidAPI-Host": import.meta.env.VITE_AI_SUMMERIZATION_X_RapidAPI_Host,
     },
     data: {
       query:
