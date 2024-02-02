@@ -19,13 +19,13 @@ export default function Charts(sData) {
               {
                 id: 0,
                 value: sData?.sData[0]?.positive,
-                label: "Positive",
+                label: "Interesting",
                 color: "#00ff00",
               },
               {
                 id: 1,
                 value: sData?.sData[0]?.negative,
-                label: "Negative",
+                label: "Boring",
                 color: "#ff0000",
               },
               {
