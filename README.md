@@ -1,0 +1,8 @@
+Hey! Have you ever found yourself immersed deeply and lost in the sea of online content and wasting hours on low-quality blogs? I have been there and drank that salty low-quality water and that's why I built Hashyy, a platform and a filter in the deep sea of the online content consumption industry.
+
+🔥 Introduction
+Introducing Hashyy, a Hashnode-powered AI tool that is designed to streamline how you process and consume online data. With a powerful text summarization ability, Hashyy can easily provide a quick overview of the blogs and can compare relative blogs for you so that you can know what's in the blog before committing your valuable time to it. But that's not all, with an AI-powered Comments Sentiment Analyzer, Hashyy can surf through the comment section and provide you with a valuable overview of the community response to it, ensuring you invest your time where it truly matters.
+
+📙 Description
+Hashyy leverages the powerful Graphql API of Hashnode and enables users to interact with the content and blogs of the authors that they posted through the popular blogging site Hashnode. Built using the easy and convenient Javascript library React, Hashyy has a powerful AI-powered ability that enables it to crawl through the content of the blog provided by the Hashnode API and quickly return a response of the overview and quality of the article to ensure that you spend your valuable time on quality blogs and what you really need. In addition to the blog overview, Hashyy can analyze the blogging Community's Response and Sentiments to it through the comment sections and can further provide feedback through a graphical representation in a Pie Chart.
+
