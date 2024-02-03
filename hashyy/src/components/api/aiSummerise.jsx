@@ -18,6 +18,7 @@ export default async function AiSummerise(text) {
 
   try {
     const response = await axios.request(options);
+    console.log(response);
     return response.data.response;
   } catch (error) {
     console.error(error);

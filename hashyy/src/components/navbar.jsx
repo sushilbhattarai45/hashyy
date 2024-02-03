@@ -37,29 +37,33 @@ export default function Navbar() {
           style={{ marginRight: "40px" }}
           class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
         >
-          <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-            <span
+          <Link to="https://github.com/sushilbhattarai45/hashyy">
+            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+              <span
+                style={{
+                  backgroundColor: "#0F172A",
+                  color: "#fff",
+                  width: "11rem",
+                  height: "2.3rem",
+                }}
+                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+              >
+                GitHub{" "}
+              </span>
+            </button>
+          </Link>
+          <Link to="https://sushilbhattarai.hashnode.dev/introducing-hashyy-a-companion-for-online-content-consumption">
+            <button
               style={{
-                backgroundColor: "#0F172A",
-                color: "#fff",
                 width: "11rem",
-                height: "2.3rem",
+                height: "2.5rem",
               }}
-              class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0"
+              type="button"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
-              GitHub{" "}
-            </span>
-          </button>
-          <button
-            style={{
-              width: "11rem",
-              height: "2.5rem",
-            }}
-            type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Hashnode
-          </button>
+              Hashnode
+            </button>
+          </Link>
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
